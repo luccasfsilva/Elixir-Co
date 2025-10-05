@@ -3,155 +3,320 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abrir PDF - Visualizador GitHub</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <title>Visualizador Moderno de PDF</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      flex-direction: column;
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #f0f9ff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
 
-    #painel-botoes {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
       display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .painel-botoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 2rem;
     }
 
     .botao {
-      background: #fff;
-      width: 220px;
-      height: 120px;
-      border-radius: 12px;
-      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 30px 20px;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .botao::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
     }
 
     .botao:hover {
-      box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.25);
-      transform: translateY(-4px);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
     }
 
     .botao i {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #666;
+      font-size: 3rem;
+      margin-bottom: 16px;
+      color: var(--primary);
+      transition: transform 0.3s ease;
     }
 
-    .botao div {
-      font-size: 1rem;
-      font-weight: bold;
-      color: #333;
+    .botao:hover i {
+      transform: scale(1.1);
     }
 
-    /* Modal ajustado */
-    #modal {
+    .botao-titulo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .botao-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Modal Modernizado */
+    .modal {
       display: none;
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(5px);
       z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    #modal-content {
-      background: #fff;
-      border-radius: 10px;
+    .modal-conteudo {
+      background: var(--white);
+      border-radius: 16px;
       width: 95%;
       height: 95%;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: modalAppear 0.3s ease-out;
     }
 
-    .close-btn {
-      background: #d33;
-      color: #fff;
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-cabecalho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--secondary);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal-titulo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .modal-fechar {
+      background: none;
       border: none;
-      padding: 10px;
+      font-size: 1.5rem;
       cursor: pointer;
-      font-weight: bold;
-      border-radius: 10px 10px 0 0;
-      text-align: center;
+      color: var(--text-light);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
 
-    .close-btn:hover {
-      background: #b22;
+    .modal-fechar:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
     }
 
-    #pdf-container {
+    .pdf-container {
       flex: 1;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      padding: 20px;
+      background: #f8fafc;
     }
 
-    iframe {
+    .pdf-frame {
       width: 100%;
       height: 100%;
       border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      margin-top: 2rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .painel-botoes {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-conteudo {
+        width: 100%;
+        height: 95%;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="painel-botoes">
-    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f6c6176616e64612e706466&logged_in=true')">
-      <i class="glyphicon glyphicon-grain"></i>
-      <div>Lavanda</div>
+  <div class="container">
+    <div class="header">
+      <h1>Catálogo de Plantas Medicinais</h1>
+      <p>Explore nossa coleção de plantas medicinais e descubra seus benefícios para a saúde</p>
     </div>
 
-    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f686f7274656c612d70696d656e74612e706466&logged_in=true')">
-      <i class="glyphicon glyphicon-grain"></i>
-      <div>Hortelã-pimenta</div>
+    <div class="painel-botoes">
+      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f6c6176616e64612e706466&logged_in=true', 'Lavanda')">
+        <i class="fas fa-spa"></i>
+        <div class="botao-titulo">Lavanda</div>
+        <div class="botao-desc">Propriedades calmantes e relaxantes</div>
+      </div>
+
+      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f686f7274656c612d70696d656e74612e706466&logged_in=true', 'Hortelã-pimenta')">
+        <i class="fas fa-leaf"></i>
+        <div class="botao-titulo">Hortelã-pimenta</div>
+        <div class="botao-desc">Alívio digestivo e refrescante</div>
+      </div>
+
+      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f616c656372696d2e706466&logged_in=true', 'Alecrim')">
+        <i class="fas fa-seedling"></i>
+        <div class="botao-titulo">Alecrim</div>
+        <div class="botao-desc">Estimulante cognitivo e antioxidante</div>
+      </div>
     </div>
 
-    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f616c656372696d2e706466&logged_in=true')">
-      <i class="glyphicon glyphicon-grain"></i>
-      <div>Alecrim</div>
+    <div class="footer">
+      <p>Clique em qualquer planta para visualizar seu arquivo PDF</p>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="modal">
-    <div id="modal-content">
-      <button class="close-btn" onclick="fecharModal()">Fechar ✖</button>
-      <div id="pdf-container">
-        <iframe id="pdf-viewer"></iframe>
+  <!-- Modal Modernizado -->
+  <div class="modal" id="modal">
+    <div class="modal-conteudo">
+      <div class="modal-cabecalho">
+        <div class="modal-titulo" id="modal-titulo">Visualizando PDF</div>
+        <button class="modal-fechar" onclick="fecharModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="pdf-container">
+        <iframe class="pdf-frame" id="pdf-viewer"></iframe>
       </div>
     </div>
   </div>
 
   <script>
-    function abrirPDF(url) {
+    function abrirPDF(url, titulo) {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
+      const modalTitulo = document.getElementById('modal-titulo');
+      
+      modalTitulo.textContent = `Visualizando: ${titulo}`;
       viewer.src = url;
       modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // evita rolagem do fundo
+      document.body.style.overflow = 'hidden';
     }
 
     function fecharModal() {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
+      
       viewer.src = '';
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
     }
+
+    // Fechar modal ao clicar fora do conteúdo
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        fecharModal();
+      }
+    });
+
+    // Fechar modal com a tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        fecharModal();
+      }
+    });
   </script>
 </body>
 </html>
