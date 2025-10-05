@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abrir PDF e Gráficos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    #painel-botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .botao {
+      background: #fff;
+      width: 220px;
+      height: 120px;
+      border-radius: 12px;
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .botao:hover {
+      box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .botao i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .botao div {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    #grafico, #grafico2 {
+      max-width: 100%;
+      height: 300px !important;
+      pointer-events: auto;
+    }
+
+    .close-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Painel de botões com layout horizontal -->
+<div id="painel-botoes" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+  <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=562d7d542afff05b60432e173098d83ca7362016&device=unknown_device&docs_host=https%3A%2F%2Fdocs.github.com&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f353632643764353432616666663035623630343332653137333039386438336361373336323031362f6c6176616e64612e706466&link_underline_enabled=true&logged_in=true&nwo=luccasfsilva%2FElixir-Co&path=lavanda.pdf&platform=windows&repository_id=1070368263&repository_type=Repository&version=122#4f58e08b-a4bd-4d0f-a510-2a48ba046ce4')">
+    <i class="glyphicon glyphicon-list-alt"></i>
+    <div>Tabela de Doenças</div>
+  </div>
+  <div class="botao" onclick="abrirPDF('https://scih-hslc.github.io/Higienedasmaos/')">
+    <i class="glyphicon glyphicon-eye-open"></i>
+    <div>Formulário Observadores Oculto</div>
+  </div>
+  <div class="botao" onclick="abrirPDF('https://raw.githubusercontent.com/SCIH-HSLC/scih-hslc.github.io/main/Boletim_semanal_epidemiologico.pdf')">
+    <i class="glyphicon glyphicon-bullhorn"></i>
+    <div>Boletim SCIH</div>
+  </div>
+  
+
+   
+
+  </script>
+</body>
+</html>
