@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visualizador Moderno de PDF</title>
+  <title>Catálogo de Óleos - Visualizador PDF</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -123,7 +123,7 @@
       color: var(--text-light);
     }
 
-    /* Modal Modernizado */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -197,18 +197,39 @@
       color: #ef4444;
     }
 
+    /* Contêiner do PDF com rolagem */
     .pdf-container {
       flex: 1;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      padding: 20px;
+      padding: 0;
       background: #f8fafc;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) #e2e8f0;
+    }
+
+    .pdf-container::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .pdf-container::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+
+    .pdf-container::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .pdf-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
     }
 
     .pdf-frame {
       width: 100%;
-      height: 100%;
+      min-height: 1200px;
       border: none;
       border-radius: 8px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -224,11 +245,9 @@
       .header h1 {
         font-size: 2rem;
       }
-      
       .painel-botoes {
         grid-template-columns: 1fr;
       }
-      
       .modal-conteudo {
         width: 100%;
         height: 95%;
@@ -239,35 +258,32 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Catálogo </h1>
+      <h1>Catálogo de Óleos Essenciais</h1>
+      <p>Clique em um item para visualizar seu PDF</p>
     </div>
 
     <div class="painel-botoes">
       <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f6c6176616e64612e706466&logged_in=true', 'Lavanda')">
         <i class="fas fa-spa"></i>
         <div class="botao-titulo">Lavanda</div>
-        <div class="botao-desc">Propriedades calmantes e relaxantes</div>
+        <div class="botao-desc">Calmante e relaxante</div>
       </div>
 
       <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f686f7274656c612d70696d656e74612e706466&logged_in=true', 'Hortelã-pimenta')">
         <i class="fas fa-leaf"></i>
         <div class="botao-titulo">Hortelã-pimenta</div>
-        <div class="botao-desc">Alívio digestivo e refrescante</div>
+        <div class="botao-desc">Refrescante e revigorante</div>
       </div>
 
       <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f616c656372696d2e706466&logged_in=true', 'Alecrim')">
         <i class="fas fa-seedling"></i>
         <div class="botao-titulo">Alecrim</div>
-        <div class="botao-desc">Estimulante cognitivo e antioxidante</div>
+        <div class="botao-desc">Estimulante e antioxidante</div>
       </div>
-    </div>
-
-    <div class="footer">
-      <p>Clique em qualquer planta para visualizar seu arquivo PDF</p>
     </div>
   </div>
 
-  <!-- Modal Modernizado -->
+  <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-conteudo">
       <div class="modal-cabecalho">
@@ -303,18 +319,12 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Fechar modal ao clicar fora do conteúdo
     document.getElementById('modal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        fecharModal();
-      }
+      if (e.target === this) fecharModal();
     });
 
-    // Fechar modal com a tecla ESC
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        fecharModal();
-      }
+      if (e.key === 'Escape') fecharModal();
     });
   </script>
 </body>
