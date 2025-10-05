@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #e8daa9;
-      --primary-dark: #4f46e5;
-      --secondary: #fffcf0;
-      --text: #3b3b1e;
-      --text-light: #8b8864;
+      --primary: #d6b85a; /* Dourado natural */
+      --primary-dark: #9b8b47; /* Tom mais fechado */
+      --secondary: #fffaf0; /* Fundo quente e suave */
+      --text: #3b3b1e; /* Tom escuro neutro */
+      --text-light: #827b52; /* Texto secundário */
       --white: #ffffff;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -25,7 +25,7 @@
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e2e2c3 100%);
+      background: linear-gradient(135deg, #fdfcf7 0%, #eae3c8 100%);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -83,6 +83,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      border: 1px solid #f2e9c6;
     }
 
     .botao::before {
@@ -131,8 +132,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(5px);
+      background: rgba(30, 30, 15, 0.8);
+      backdrop-filter: blur(6px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -194,7 +195,7 @@
 
     .modal-fechar:hover {
       background: rgba(239, 68, 68, 0.1);
-      color: #ef4444;
+      color: #d12a2a;
     }
 
     /* Contêiner do PDF com rolagem */
@@ -202,8 +203,7 @@
       flex: 1;
       width: 100%;
       height: 100%;
-      padding: 0;
-      background: #f8fafc;
+      background: #fdfbf6;
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: var(--primary) #e2e8f0;
@@ -214,7 +214,7 @@
     }
 
     .pdf-container::-webkit-scrollbar-track {
-      background: #e2e8f0;
+      background: #f5f0dd;
       border-radius: 10px;
     }
 
