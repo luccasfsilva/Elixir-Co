@@ -57,61 +57,29 @@
       font-weight: bold;
       color: #333;
     }
-
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    #modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    #grafico, #grafico2 {
-      max-width: 100%;
-      height: 300px !important;
-      pointer-events: auto;
-    }
-
-    .close-btn {
-      background: red;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 15px;
-    }
   </style>
 </head>
 <body>
-  <!-- Painel de botões com layout horizontal -->
-<div id="painel-botoes" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-  <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/blob/99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2/lavanda.pdf')">
-    <i class="glyphicon glyphicon-grain"></i>
-    <div>Lavanda</div>
+  <!-- Painel de botões -->
+  <div id="painel-botoes">
+    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/lavanda.pdf')">
+      <i class="glyphicon glyphicon-grain"></i>
+      <div>Lavanda</div>
+    </div>
+    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/hortela-pimenta.pdf')">
+      <i class="glyphicon glyphicon-grain"></i>
+      <div>Hortelã-pimenta</div>
+    </div>
+    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/alecrim.pdf')">
+      <i class="glyphicon glyphicon-grain"></i>
+      <div>Alecrim</div>
+    </div>
   </div>
-  <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/blob/99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2/hortela-pimenta.pdf)">
-    <i class="glyphicon glyphicon-grain"></i>
-    <div>Hortelã-pimenta</div>
-  </div>
-  <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/blob/99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2/alecrim.pdf')">
-    <i class="glyphicon glyphicon-grain"></i>
-    <div>Alecrim</div>
-  </div>
+
+  <script>
+    function abrirPDF(url) {
+      window.open(url, '_blank');
+    }
   </script>
 </body>
 </html>
