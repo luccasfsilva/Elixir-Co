@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abrir PDF e Gráficos</title>
+  <title>Abrir PDF - Visualizador GitHub</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -74,16 +73,15 @@
 
     #modal-content {
       background: white;
-      padding: 0;
       border-radius: 8px;
       width: 90%;
       height: 90%;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
 
-    #modal iframe {
+    iframe {
       width: 100%;
       height: 100%;
       border: none;
@@ -93,7 +91,7 @@
       background: #d33;
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 10px;
       cursor: pointer;
       border-radius: 0 0 8px 8px;
       font-weight: bold;
@@ -106,21 +104,23 @@
 </head>
 <body>
   <div id="painel-botoes">
-    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/lavanda.pdf')">
+    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f6c6176616e64612e706466&logged_in=true')">
       <i class="glyphicon glyphicon-grain"></i>
       <div>Lavanda</div>
     </div>
-    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/hortela-pimenta.pdf')">
+
+    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f686f7274656c612d70696d656e74612e706466&logged_in=true')">
       <i class="glyphicon glyphicon-grain"></i>
       <div>Hortelã-pimenta</div>
     </div>
-    <div class="botao" onclick="abrirPDF('https://github.com/luccasfsilva/Elixir-Co/raw/main/alecrim.pdf')">
+
+    <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f616c656372696d2e706466&logged_in=true')">
       <i class="glyphicon glyphicon-grain"></i>
       <div>Alecrim</div>
     </div>
   </div>
 
-  <!-- Modal para exibir o PDF -->
+  <!-- Modal para exibir PDF -->
   <div id="modal">
     <div id="modal-content">
       <button class="close-btn" onclick="fecharModal()">Fechar ✖</button>
@@ -132,13 +132,15 @@
     function abrirPDF(url) {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
-      viewer.src = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+      viewer.src = url;
       modal.style.display = 'flex';
     }
 
     function fecharModal() {
-      document.getElementById('modal').style.display = 'none';
-      document.getElementById('pdf-viewer').src = '';
+      const modal = document.getElementById('modal');
+      const viewer = document.getElementById('pdf-viewer');
+      viewer.src = '';
+      modal.style.display = 'none';
     }
   </script>
 </body>
