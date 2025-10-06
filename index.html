@@ -236,11 +236,21 @@
   </div>
 
   <script>
+    function abrirPDF(url, titulo) {
+      const modal = document.getElementById('modal');
+      const viewer = document.getElementById('pdf-viewer');
+      const modalTitulo = document.getElementById('modal-titulo');
+      
+      modalTitulo.textContent = `Visualizando: ${titulo}`;
+      viewer.src = url;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
     // Fundo de partículas animado
     window.onload = function () {
       Particles.init({
         selector: ".background",
-        color: ["#03dac6", "#ff0266", "#ffffff"],
+        color: ["#03dac6", "#ff0266", "#7803ff"],
         connectParticles: true,
         maxParticles: 120
       });
@@ -274,7 +284,6 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') fecharModal();
     });
-    
   </script>
 </body>
 </html>
