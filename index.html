@@ -3,20 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Óleos - Visualizador PDF</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #d6b85a; /* Dourado natural */
-      --primary-dark: #9b8b47; /* Tom mais fechado */
-      --secondary: #fffaf0; /* Fundo quente e suave */
-      --text: #3b3b1e; /* Tom escuro neutro */
-      --text-light: #827b52; /* Texto secundário */
-      --white: #ffffff;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
-    }
+  <title>Catálogo de Óleos - Fundo Animado</title>
 
+  <!-- Ícones e fontes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Particles.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+
+  <style>
     * {
       margin: 0;
       padding: 0;
@@ -24,115 +20,102 @@
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #fdfcf7 0%, #eae3c8 100%);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: "Roboto", sans-serif;
+      color: #fefefe;
+      overflow-x: hidden;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      position: relative;
+    }
+
+    /* Fundo animado */
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     .container {
+      position: relative;
+      z-index: 2;
       max-width: 1200px;
-      width: 100%;
+      margin: 0 auto;
+      padding: 50px 20px;
       text-align: center;
     }
 
-    .header {
-      margin-bottom: 3rem;
-    }
-
     .header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
+      font-family: "Josefin Sans", sans-serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: #03dac6;
+      text-shadow: 0 0 15px rgba(3, 218, 198, 0.4);
+      margin-bottom: 10px;
     }
 
     .header p {
-      font-size: 1.1rem;
-      color: var(--text-light);
-      max-width: 600px;
-      margin: 0 auto;
+      color: #cfcfcf;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
 
     .painel-botoes {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
-      margin-bottom: 2rem;
     }
 
     .botao {
-      background: var(--white);
+      background: rgba(30, 31, 38, 0.8);
       border-radius: 16px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       padding: 30px 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #f2e9c6;
-    }
-
-    .botao::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
     }
 
     .botao:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
+      background: rgba(3, 218, 198, 0.15);
+      box-shadow: 0 15px 25px rgba(3, 218, 198, 0.2);
     }
 
     .botao i {
       font-size: 3rem;
       margin-bottom: 16px;
-      color: var(--primary);
+      color: #03dac6;
       transition: transform 0.3s ease;
     }
 
     .botao:hover i {
       transform: scale(1.1);
+      color: #ff0266;
     }
 
     .botao-titulo {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text);
+      color: #ffffff;
     }
 
     .botao-desc {
-      font-size: 0.9rem;
-      color: var(--text-light);
+      font-size: 1rem;
+      color: #b8b8b8;
     }
 
     /* Modal */
     .modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(30, 30, 15, 0.8);
+      background: rgba(10, 10, 15, 0.85);
       backdrop-filter: blur(6px);
       z-index: 1000;
       align-items: center;
@@ -141,26 +124,20 @@
     }
 
     .modal-conteudo {
-      background: var(--white);
+      background: #1e1f26;
       border-radius: 16px;
       width: 95%;
-      height: 95%;
+      height: 90%;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       animation: modalAppear 0.3s ease-out;
     }
 
     @keyframes modalAppear {
-      from {
-        opacity: 0;
-        transform: scale(0.9) translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .modal-cabecalho {
@@ -168,14 +145,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 24px;
-      background: var(--secondary);
-      border-bottom: 1px solid #e2e8f0;
+      background: rgba(3, 218, 198, 0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     .modal-titulo {
       font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 500;
+      color: #03dac6;
     }
 
     .modal-fechar {
@@ -183,79 +160,38 @@
       border: none;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--text-light);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: #ff0266;
       transition: all 0.2s ease;
     }
 
     .modal-fechar:hover {
-      background: rgba(239, 68, 68, 0.1);
-      color: #d12a2a;
+      transform: rotate(90deg);
     }
 
-    /* Contêiner do PDF com rolagem */
     .pdf-container {
       flex: 1;
-      width: 100%;
-      height: 100%;
-      background: #fdfbf6;
+      background: #121212;
       overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) #e2e8f0;
-    }
-
-    .pdf-container::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-track {
-      background: #f5f0dd;
-      border-radius: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
     }
 
     .pdf-frame {
       width: 100%;
-      min-height: 1200px;
+      height: 100%;
       border: none;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
 
     .footer {
       margin-top: 2rem;
-      color: var(--text-light);
+      color: #aaaaaa;
       font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2rem;
-      }
-      .painel-botoes {
-        grid-template-columns: 1fr;
-      }
-      .modal-conteudo {
-        width: 100%;
-        height: 95%;
-      }
+      text-align: center;
     }
   </style>
 </head>
+
 <body>
+  <canvas class="background"></canvas>
+
   <div class="container">
     <div class="header">
       <h1>Catálogo de Óleos Essenciais</h1>
@@ -263,24 +199,26 @@
     </div>
 
     <div class="painel-botoes">
-      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f6c6176616e64612e706466&logged_in=true', 'Lavanda')">
+      <div class="botao" onclick="abrirPDF('https://raw.githubusercontent.com/luccasfsilva/Elixir-Co/main/lavanda.pdf', 'Lavanda')">
         <i class="fas fa-spa"></i>
         <div class="botao-titulo">Lavanda</div>
         <div class="botao-desc">Calmante e relaxante</div>
       </div>
 
-      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f686f7274656c612d70696d656e74612e706466&logged_in=true', 'Hortelã-pimenta')">
+      <div class="botao" onclick="abrirPDF('https://raw.githubusercontent.com/luccasfsilva/Elixir-Co/main/hortela-pimenta.pdf', 'Hortelã-pimenta')">
         <i class="fas fa-leaf"></i>
         <div class="botao-titulo">Hortelã-pimenta</div>
         <div class="botao-desc">Refrescante e revigorante</div>
       </div>
 
-      <div class="botao" onclick="abrirPDF('https://viewscreen.githubusercontent.com/view/pdf?browser=opera&bypass_fastly=true&color_mode=auto&commit=99c00515eb4fdf6a9f1f93565ed4b428e33ca9d2&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c75636361736673696c76612f456c697869722d436f2f393963303035313565623466646636613966316639333536356564346234323865333363613964322f616c656372696d2e706466&logged_in=true', 'Alecrim')">
+      <div class="botao" onclick="abrirPDF('https://raw.githubusercontent.com/luccasfsilva/Elixir-Co/main/alecrim.pdf', 'Alecrim')">
         <i class="fas fa-seedling"></i>
         <div class="botao-titulo">Alecrim</div>
         <div class="botao-desc">Estimulante e antioxidante</div>
       </div>
     </div>
+
+    <div class="footer">© 2025 Elixir & Co. — Desenvolvido por Lucas Fernandes</div>
   </div>
 
   <!-- Modal -->
@@ -288,9 +226,7 @@
     <div class="modal-conteudo">
       <div class="modal-cabecalho">
         <div class="modal-titulo" id="modal-titulo">Visualizando PDF</div>
-        <button class="modal-fechar" onclick="fecharModal()">
-          <i class="fas fa-times"></i>
-        </button>
+        <button class="modal-fechar" onclick="fecharModal()"><i class="fas fa-times"></i></button>
       </div>
       <div class="pdf-container">
         <iframe class="pdf-frame" id="pdf-viewer"></iframe>
@@ -299,6 +235,17 @@
   </div>
 
   <script>
+    // Fundo de partículas animado
+    window.onload = function () {
+      Particles.init({
+        selector: ".background",
+        color: ["#03dac6", "#ff0266", "#ffffff"],
+        connectParticles: true,
+        maxParticles: 120
+      });
+    };
+
+    // Modal PDF
     function abrirPDF(url, titulo) {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
@@ -313,7 +260,6 @@
     function fecharModal() {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
-      
       viewer.src = '';
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
