@@ -236,6 +236,15 @@
   </div>
 
   <script>
+    // Fundo de partículas animado
+    window.onload = function () {
+      Particles.init({
+        selector: ".background",
+        color: ["#4516c7", "#884ddb", "#7803ff"],
+        connectParticles: true,
+        maxParticles: 120
+      });
+    };
     function abrirPDF(url, titulo) {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
@@ -246,15 +255,6 @@
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
-    // Fundo de partículas animado
-    window.onload = function () {
-      Particles.init({
-        selector: ".background",
-        color: ["#03dac6", "#ff0266", "#7803ff"],
-        connectParticles: true,
-        maxParticles: 120
-      });
-    };
 
      // Modal PDF
     function abrirPDF(url, titulo) {
