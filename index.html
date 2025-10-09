@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Óleos - Fundo Animado</title>
+  <title>Catálogo de Óleos - Fundo Mágico</title>
 
   <!-- Ícones e fontes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <!-- Particles.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
 
   <style>
     * {
@@ -21,22 +18,93 @@
 
     body {
       font-family: "Roboto", sans-serif;
-      color: #ffffff; /* texto branco */
+      color: #ffffff;
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
-      background-color: #2e2e2d; /* fundo */
+      background-color: #0e0b16;
     }
 
-    /* Fundo animado */
-    .background {
+    /* --- Fundo de fumaça mágica --- */
+    .magic-smoke {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
+      background: radial-gradient(circle at 50% 50%, #1e003e, #0b0016 80%);
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .smoke {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 73, 255, 0.3) 0%, transparent 70%);
+      filter: blur(100px);
+      animation: floatSmoke 20s infinite ease-in-out;
+      mix-blend-mode: screen;
+    }
+
+    .smoke:nth-child(1) {
+      top: 10%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .smoke:nth-child(2) {
+      top: 40%;
+      left: 60%;
+      animation-delay: 5s;
+    }
+
+    .smoke:nth-child(3) {
+      top: 70%;
+      left: 30%;
+      animation-delay: 10s;
+    }
+
+    @keyframes floatSmoke {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      50% {
+        transform: translateY(-60px) translateX(40px) scale(1.2);
+      }
+    }
+
+    /* --- Partículas mágicas --- */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0; left: 0;
       z-index: -1;
     }
 
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #c400ff 0%, transparent 60%);
+      border-radius: 50%;
+      animation: floatParticles 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatParticles {
+      from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0.4;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* --- Conteúdo --- */
     .container {
       position: relative;
       z-index: 2;
@@ -50,8 +118,8 @@
       font-family: "Josefin Sans", sans-serif;
       font-size: 3rem;
       letter-spacing: 2px;
-      color: #03dac6;
-      text-shadow: 0 0 15px rgba(3, 218, 198, 0.4);
+      color: #b982ff;
+      text-shadow: 0 0 20px rgba(180, 100, 255, 0.5);
       margin-bottom: 10px;
     }
 
@@ -82,20 +150,20 @@
 
     .botao:hover {
       transform: translateY(-8px);
-      background: rgba(3, 218, 198, 0.15);
-      box-shadow: 0 15px 25px rgba(3, 218, 198, 0.2);
+      background: rgba(185, 130, 255, 0.15);
+      box-shadow: 0 15px 25px rgba(185, 130, 255, 0.2);
     }
 
     .botao i {
       font-size: 3rem;
       margin-bottom: 16px;
-      color: #03dac6;
+      color: #b982ff;
       transition: transform 0.3s ease;
     }
 
     .botao:hover i {
       transform: scale(1.1);
-      color: #ff0266;
+      color: #ff66cc;
     }
 
     .botao-titulo {
@@ -109,7 +177,7 @@
       color: #b8b8b8;
     }
 
-    /* Modal */
+    /* --- Modal --- */
     .modal {
       display: none;
       position: fixed;
@@ -146,14 +214,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 24px;
-      background: rgba(3, 218, 198, 0.1);
+      background: rgba(185, 130, 255, 0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     .modal-titulo {
       font-size: 1.25rem;
       font-weight: 500;
-      color: #03dac6;
+      color: #b982ff;
     }
 
     .modal-fechar {
@@ -161,7 +229,7 @@
       border: none;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #ff0266;
+      color: #ff66cc;
       transition: all 0.2s ease;
     }
 
@@ -187,49 +255,6 @@
       font-size: 0.9rem;
       text-align: center;
     }
-     /* Contêiner do PDF com rolagem */
-    .pdf-container {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      background: #f8fafc;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) #e2e8f0;
-    }
-
-    .pdf-container::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-track {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 10px;
-    }
-
-    .pdf-container::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
-    }
-
-    .pdf-frame {
-      width: 100%;
-      min-height: 1200px;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .footer {
-      margin-top: 2rem;
-      color: var(--text-light);
-      font-size: 0.9rem;
-    }
 
     @media (max-width: 768px) {
       .header h1 {
@@ -247,8 +272,16 @@
 </head>
 
 <body>
-  <canvas class="background"></canvas>
+  <!-- Fundo de fumaça e partículas -->
+  <div class="magic-smoke">
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+  </div>
 
+  <div class="particles" id="particles"></div>
+
+  <!-- Conteúdo principal -->
   <div class="container">
     <div class="header">
       <h1>Catálogo de Óleos Essenciais</h1>
@@ -292,27 +325,19 @@
   </div>
 
   <script>
-    // Fundo de partículas animado
-    window.onload = function () {
-      Particles.init({
-        selector: ".background",
-        color: ["#4516c7", "#884ddb", "#7803ff"],
-        connectParticles: true,
-        maxParticles: 120
-      });
-    };
-    function abrirPDF(url, titulo) {
-      const modal = document.getElementById('modal');
-      const viewer = document.getElementById('pdf-viewer');
-      const modalTitulo = document.getElementById('modal-titulo');
-      
-      modalTitulo.textContent = `Visualizando: ${titulo}`;
-      viewer.src = url;
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+    // Cria partículas mágicas aleatórias
+    const particleContainer = document.getElementById("particles");
+
+    for (let i = 0; i < 60; i++) {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+      particle.style.left = Math.random() * 100 + "vw";
+      particle.style.animationDuration = 8 + Math.random() * 8 + "s";
+      particle.style.animationDelay = Math.random() * 8 + "s";
+      particleContainer.appendChild(particle);
     }
 
-     // Modal PDF
+    // Funções do modal
     function abrirPDF(url, titulo) {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
@@ -327,7 +352,6 @@
     function fecharModal() {
       const modal = document.getElementById('modal');
       const viewer = document.getElementById('pdf-viewer');
-      
       viewer.src = '';
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
